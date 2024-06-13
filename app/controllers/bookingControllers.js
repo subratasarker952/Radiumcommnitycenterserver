@@ -6,7 +6,7 @@ const getAllDocument = async (req, res) => {
   const bookings = await bookingCollection.find(query).toArray();
   return res.send(bookings);
 };
-const addAdocument = async (req, res) => {
+const addADocument = async (req, res) => {
   const booking = req.body;
   const result = await bookingCollection.insertOne(booking);
   res.send(result);
@@ -44,7 +44,7 @@ const getAllDocumentByEmail = async (req, res) => {
 
 module.exports = {
   getAllDocument,
-  addAdocument,
+  addADocument,
   deleteADocumentById,
   updateADocumentById,
   getADocumentById,

@@ -16,7 +16,7 @@ const getAllDocument = async (req, res) => {
   return res.send(events);
 };
 
-const addAdocument = async (req, res) => {
+const addADocument = async (req, res) => {
   const product = req.body;
   const result = await eventCollection.insertOne(product);
   return res.send(result);
@@ -45,7 +45,7 @@ const getADocumentById = async (req, res) => {
 
 module.exports = {
   getAllDocument,
-  addAdocument,
+  addADocument,
   deleteADocumentById,
   updateADocumentById,
   getADocumentById,

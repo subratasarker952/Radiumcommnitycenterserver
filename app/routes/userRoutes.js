@@ -3,7 +3,7 @@ const { verifyUser, verifyAdmin } = require("../utils/utilityFunctions");
 const {
   getUserWithRole,
   getAllDocument,
-  addAdocument,
+  addADocument,
   deleteADocumentById,
   updateADocumentById,
   getADocumentById,
@@ -13,7 +13,7 @@ const {
 const UserRouter = express.Router();
 
 UserRouter.get("/",verifyUser, verifyAdmin, getAllDocument);
-UserRouter.post("/", addAdocument);
+UserRouter.post("/", addADocument);
 UserRouter.delete("/:id", verifyUser,verifyAdmin, deleteADocumentById);
 UserRouter.patch("/:id", verifyUser, updateADocumentById);
 UserRouter.get("/:id",verifyUser, getADocumentById);

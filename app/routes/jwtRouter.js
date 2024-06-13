@@ -1,6 +1,6 @@
 const express = require("express");
-const { genareteAndSendJwt } = require("../controllers/jwtControllers");
+const { generateAndSendJwt } = require("../controllers/jwtControllers");
 const JwtRouter = express.Router();
 
-JwtRouter.post("/", genareteAndSendJwt);
+JwtRouter.post("/", generateAndSendJwt);
 module.exports = JwtRouter;

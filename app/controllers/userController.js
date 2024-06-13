@@ -5,7 +5,7 @@ const getAllDocument = async (req, res) => {
   const users = await userCollection.find().toArray();
   return res.send(users);
 };
-const addAdocument = async (req, res) => {
+const addADocument = async (req, res) => {
   const user = req.body;
   const email = req.body.email;
   const query = { email: email };
@@ -52,7 +52,7 @@ const getUserWithRole = async (req, res) => {
 
 module.exports = {
   getAllDocument,
-  addAdocument,
+  addADocument,
   deleteADocumentById,
   updateADocumentById,
   getADocumentById,

@@ -25,9 +25,9 @@ app.use("/payments", paymentRouter);
 app.use("/jwt", JwtRouter);
 
 app.get("/", (req, res) => {
-  res.send("Niyenin server running ");
+  res.send("server running ");
 });
 
 app.listen(port, () => {
-  console.log(`Radiumcommunityserver listening on port ${port}`);
+  console.log(`RadiumCommunityServer listening on port ${port}`);
 });
