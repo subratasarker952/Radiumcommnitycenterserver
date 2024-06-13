@@ -1,5 +1,5 @@
 const { ObjectId } = require("mongodb");
-const paymentCollection = require("../models/paymentModel");
+const bookingCollection = require("../models/bookingModel");
 const SSLCommerzPayment = require("sslcommerz-lts");
 const uuid = require("uuid");
 
@@ -57,21 +57,14 @@ const paymentCancel = async (req, res) => {
 };
 
 const paymentInitialize = async (req, res) => {
-  const order = req.body;
-  const id = req.params.id;
+  const booking = req.body;
   const tran_id = uuid.v4();
 
-  const filter = { _id: new ObjectId(id) };
-  await orderCollection.updateOne(filter, {
-    $set: {
-      ...order,
-      tran_id: tran_id,
-    },
-  });
+  await bookingCollection.insertOne({ ...booking, tran_id });
 
   const data = {
-    total_amount: order.amount,
-    currency: order.currency,
+    total_amount: booking.amount,
+    currency: "BDT",
     tran_id: tran_id,
     success_url: `${process.env.SERVER_URL}/payments/payment/success?tran_id=${tran_id}`,
     fail_url: `${process.env.SERVER_URL}/payments/payment/fail?tran_id=${tran_id}`,
@@ -81,23 +74,23 @@ const paymentInitialize = async (req, res) => {
     product_name: "Computer.",
     product_category: "Electronic",
     product_profile: "general",
-    cus_name: order.name,
-    cus_email: order.email,
-    cus_add1: order.village,
-    cus_add2: order.upoZilla,
-    cus_city: order.zilla,
-    cus_state: order.street,
-    cus_postcode: order.postcode,
-    cus_country: order.country,
-    cus_phone: order.phone,
-    cus_fax: "01711111",
-    ship_name: order.name,
-    ship_add1: order.village,
-    ship_add2: order.upoZilla,
-    ship_city: order.zilla,
-    ship_state: order.street,
-    ship_postcode: order.postcode,
-    ship_country: order.country,
+    cus_name: booking.email,
+    cus_email: booking.email,
+    cus_add1: "",
+    cus_add2: "",
+    cus_city: "",
+    cus_state: "",
+    cus_postcode: "",
+    cus_country: "Bangladesh",
+    cus_phone: booking.mobile,
+    cus_fax: "0171111",
+    ship_name: "",
+    ship_add1: "",
+    ship_add2: "",
+    ship_city: "",
+    ship_state: "",
+    ship_postcode: "",
+    ship_country: "",
     multi_card_name: "mastercard",
     value_a: "ref001_A",
     value_b: "ref002_B",
@@ -112,16 +105,11 @@ const paymentInitialize = async (req, res) => {
   });
   res.send({ url });
 };
-const getADocumentById = (req, res) => {};
-const getADocumentByTransId = (req, res) => {};
-const getAllDocumentByEmail = (req, res) => {};
 
 module.exports = {
   paymentSuccess,
   paymentFail,
   paymentCancel,
   paymentInitialize,
-  getADocumentById,
-  getADocumentByTransId,
-  getAllDocumentByEmail,
+
 };

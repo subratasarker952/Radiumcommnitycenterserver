@@ -18,7 +18,7 @@ const addADocument = async (req, res) => {
 };
 const deleteADocumentById = async (req, res) => {
   const id = req.params.id;
-  const query = { _id: ObjectId(id) };
+  const query = { _id: new ObjectId(id) };
   const result = await userCollection.deleteOne(query);
   return res.send(result);
 };
@@ -33,7 +33,7 @@ const updateADocumentById = async (req, res) => {
 };
 const getADocumentById = async (req, res) => {
   const id = req.params.id;
-  const query = { _id: ObjectId(id) };
+  const query = { _id: new ObjectId(id) };
   const user = await userCollection.findOne(query);
   return res.send(user);
 };

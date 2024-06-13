@@ -24,21 +24,21 @@ const addADocument = async (req, res) => {
 
 const deleteADocumentById = async (req, res) => {
   const id = req.params.id;
-  const filter = { _id: ObjectId(id) };
+  const filter = { _id: new ObjectId(id) };
   const result = await eventCollection.deleteOne(filter);
   return res.send(result);
 };
 
 const updateADocumentById = async (req, res) => {
   const id = req.params.id;
-  const filter = { _id: ObjectId(id) };
+  const filter = { _id: new ObjectId(id) };
   const doc = req.body;
   const result = await eventCollection.updateOne(filter, doc);
   return res.send(result);
 };
 const getADocumentById = async (req, res) => {
   const id = req.params.id;
-  const query = { _id: ObjectId(id) };
+  const query = { _id: new ObjectId(id) };
   const product = await eventCollection.findOne(query);
   return res.send(product);
 };

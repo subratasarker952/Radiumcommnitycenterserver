@@ -13,13 +13,13 @@ const addADocument = async (req, res) => {
 };
 const deleteADocumentById = async (req, res) => {
   const { id } = req.params;
-  const filter = { _id: ObjectId(id) };
+  const filter = { _id: new ObjectId(id) };
   const result = await bookingCollection.deleteOne(filter);
   res.send(result);
 };
 const updateADocumentById = async (req, res) => {
   const { id } = req.params;
-  const filter = { _id: ObjectId(id) };
+  const filter = { _id: new ObjectId(id) };
   const booking = req.body;
   const updateDoc = {
     $set: {
@@ -31,7 +31,7 @@ const updateADocumentById = async (req, res) => {
 };
 const getADocumentById = async (req, res) => {
   const { id } = req.params;
-  const query = { _id: ObjectId(id) };
+  const query = { _id: new ObjectId(id) };
   const booking = await bookingCollection.find(query);
   return res.send(booking);
 };
