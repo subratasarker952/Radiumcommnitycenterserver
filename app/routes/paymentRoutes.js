@@ -7,7 +7,7 @@ const { paymentSuccess, paymentFail, paymentCancel, paymentInitialize } = requir
 paymentRouter.post("/payment/success", paymentSuccess);
 paymentRouter.post("/payment/fail", paymentFail);
 paymentRouter.post("/payment/cancel", paymentCancel);
-paymentRouter.patch("/initialize", paymentInitialize);
+paymentRouter.post("/initialize", paymentInitialize);
 
 
 module.exports = paymentRouter;

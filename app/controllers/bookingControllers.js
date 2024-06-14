@@ -42,6 +42,13 @@ const getAllDocumentByEmail = async (req, res) => {
   return res.send(bookings);
 };
 
+const getADocumentByTrans_Id = async (req, res) => {
+  const { trans_id } = req.params;
+  const query = { trans_id };
+  const booking = await bookingCollection.findOne(query);
+  return res.send(booking);
+};
+
 module.exports = {
   getAllDocument,
   addADocument,
@@ -49,4 +56,5 @@ module.exports = {
   updateADocumentById,
   getADocumentById,
   getAllDocumentByEmail,
+  getADocumentByTrans_Id
 };
