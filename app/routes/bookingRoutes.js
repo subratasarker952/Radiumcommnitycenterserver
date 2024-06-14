@@ -17,6 +17,6 @@ bookingRouter.delete("/:id", verifyUser, deleteADocumentById);
 bookingRouter.patch("/:id", verifyUser, updateADocumentById);
 bookingRouter.get("/:id", verifyUser, getADocumentById);
 bookingRouter.get("/tran_id/:tran_id", verifyUser, getADocumentByTrans_Id);
-bookingRouter.get("/email/:email", getAllDocumentByEmail);
+bookingRouter.get("/email/:email",verifyUser, getAllDocumentByEmail);
 
 module.exports = bookingRouter;

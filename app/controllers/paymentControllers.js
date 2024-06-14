@@ -21,35 +21,15 @@ if(result.modifiedCount>0){
 };
 const paymentFail = async (req, res) => {
   const { tran_id } = req.query;
-  const result = await bookingCollection.updateOne(
-    { tran_id },
-    {
-      $set: {
-        paymentStatus: "due",
-        orderStatus: "",
-        tran_id: "",
-        tryToPayAt: new Date(),
-      },
-    }
-  );
-  if (result.modifiedCount > 0) {
+  const result = await bookingCollection.deleteOne({ tran_id });
+  if (result.deletedCount > 0) {
     res.redirect(`${process.env.CLIENT_URL}/payment/fail`);
   }
 };
 const paymentCancel = async (req, res) => {
   const { tran_id } = req.query;
-  const result = await orderCollection.updateOne(
-    { tran_id },
-    {
-      $set: {
-        paymentStatus: "due",
-        orderStatus: "",
-        tran_id: "",
-        tryToPayAt: new Date(),
-      },
-    }
-  );
-  if (result.modifiedCount > 0) {
+  const result = await bookingCollection.deleteOne({ tran_id });
+  if (result.deletedCount > 0) {
     res.redirect(`${process.env.CLIENT_URL}/payment/cancel`);
   }
 };
@@ -65,7 +45,7 @@ const paymentInitialize = async (req, res) => {
     tran_id: tran_id,
     success_url: `${process.env.SERVER_URL}/payments/payment/success?tran_id=${tran_id}`,
     fail_url: `${process.env.SERVER_URL}/payments/payment/fail?tran_id=${tran_id}`,
-    cancel_url: `${process.env.SERVER_URL}/payments/payment/cancel`,
+    cancel_url: `${process.env.SERVER_URL}/payments/payment/cancel?tran_id=${tran_id}`,
     ipn_url: `${process.env.SERVER_URL}/payments/payment/ipn`,
     shipping_method: "Courier",
     product_name: "ticket",
