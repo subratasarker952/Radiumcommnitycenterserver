@@ -15,11 +15,9 @@ const paymentSuccess = async (req, res) => {
       $set: { paymentStatus: "paid", paidAt: new Date() },
     }
   );
-  if (result.modifiedCount > 0) {
-    res.redirect(
-      `${process.env.CLIENT_URL}/payment/success?tran_id=${tran_id}`
-    );
-  }
+if(result.modifiedCount>0){
+  res.redirect(`${process.env.CLIENT_URL}/payment/success?tran_id=${tran_id}`);
+}
 };
 const paymentFail = async (req, res) => {
   const { tran_id } = req.query;
@@ -65,8 +63,8 @@ const paymentInitialize = async (req, res) => {
     total_amount: booking.amount,
     currency: "BDT",
     tran_id: tran_id,
-    success_url: `${process.env.SERVER_URL}/payments/payment/success?trans_id=${tran_id}`,
-    fail_url: `${process.env.SERVER_URL}/payments/payment/fail?trans_id=${tran_id}`,
+    success_url: `${process.env.SERVER_URL}/payments/payment/success?tran_id=${tran_id}`,
+    fail_url: `${process.env.SERVER_URL}/payments/payment/fail?tran_id=${tran_id}`,
     cancel_url: `${process.env.SERVER_URL}/payments/payment/cancel`,
     ipn_url: `${process.env.SERVER_URL}/payments/payment/ipn`,
     shipping_method: "Courier",

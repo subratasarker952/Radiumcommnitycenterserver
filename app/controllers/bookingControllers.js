@@ -32,7 +32,7 @@ const updateADocumentById = async (req, res) => {
 const getADocumentById = async (req, res) => {
   const { id } = req.params;
   const query = { _id: new ObjectId(id) };
-  const booking = await bookingCollection.find(query);
+  const booking = await bookingCollection.findOne(query);
   return res.send(booking);
 };
 
@@ -43,8 +43,8 @@ const getAllDocumentByEmail = async (req, res) => {
 };
 
 const getADocumentByTrans_Id = async (req, res) => {
-  const { trans_id } = req.params;
-  const query = { trans_id };
+  const { tran_id } = req.params;
+  const query = { tran_id };
   const booking = await bookingCollection.findOne(query);
   return res.send(booking);
 };
